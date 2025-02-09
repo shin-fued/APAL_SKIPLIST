@@ -63,14 +63,18 @@ public class Skip_List {
         SL_Node current = head;
         boolean found = false;
         for (int i = curr_max-1; i >= 0; i--) {
-            while (current.next[i] != null && current.next[i].getKey()<key) {
+            while (null != current.next[i]) {
+                if(current.next[i].getKey() < key){
+                    break;
+                }
                 if (current.next[i].getKey()==key){
                     current.next[i] = current.next[i].next[i];
                     found = true;
                     size--;
+                    break;
                 }
+                current = current.next[i];
             }
-            current = current.next[i];
         }
         return found;
     }
