@@ -22,7 +22,7 @@ public class CSV_Logger {
         else {
             unit = " unit";
         }
-        String header = String.format("operation, %s skip_list %s,%s map %s", measure,unit, measure, unit);
+        String header = String.format("n, operation, %s skip_list %s,%s map %s", measure,unit, measure, unit);
 
         // Check if the file exists before appending the header
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(CSV_FILE_PATH, true))) {
