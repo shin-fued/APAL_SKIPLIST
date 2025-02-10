@@ -144,7 +144,7 @@ public class Skip_List {
                 current = current.next[i];
             }
         }
-        if (current.getKey()==key) {
+        if (current!=null && current.getKey()==key) {
             return current.getVal();
         }
         else{

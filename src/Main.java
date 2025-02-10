@@ -30,7 +30,7 @@ public class Main {
             for (int i = 10; i <= 5_000_000; ){
                 t.Test_Insert( i);
                 t.Test_Search(i);
-                t.Test_Delete(i);
+                t.Test_Search_up(i);
                 i*=2;
             }
         }
