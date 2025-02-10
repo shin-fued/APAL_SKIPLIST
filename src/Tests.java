@@ -59,6 +59,20 @@ public class Tests {
             }
             map_end = System.nanoTime();
         }
+        else if (op.equals("search_up"))
+        {
+            sk_start = System.nanoTime();
+            for(Map.Entry<Integer, Integer> item : this.samples){
+                this.sk.search_up(item.getKey());
+            }
+            sk_end = System.nanoTime();
+
+            map_start = System.nanoTime();
+            for(Map.Entry<Integer, Integer> item : this.samples){
+                this.ctrl.get(item.getKey());
+            }
+            map_end = System.nanoTime();
+        }
         else if(op.equals("delete"))
         {
             sk_start = System.nanoTime();
@@ -161,6 +175,9 @@ public class Tests {
     }
     public void Test_Search(int n){
         Test_op(n,"search");
+    }
+    public void Test_Search_up(int n){
+        Test_op(n,"search_up");
     }
 
 }

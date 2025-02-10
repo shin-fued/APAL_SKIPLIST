@@ -19,6 +19,9 @@ public class SL_Node {
     public int getVal() {
         return this.val;
     }
+    public int getLevel() {
+        return this.level;
+    }
     @Override
     public String toString() {
         return "[ level " + this.level + " | key "+this.key + " ]";

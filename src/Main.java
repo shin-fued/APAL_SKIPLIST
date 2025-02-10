@@ -7,7 +7,8 @@ public class Main {
         Tests t = new Tests();
 
         t.initialise_samples("time");
-        //inserting/seraching/deleting the same amount as the size go up
+//        int i;
+//        //inserting/seraching/deleting the same amount as the size go up
 //        for (i = 1000; i<=10_000_000; ){
 //            t.Test_Insert(i-1000, i);
 //            t.Test_Search(i-1000, i);

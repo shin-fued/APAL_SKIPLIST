@@ -23,7 +23,7 @@ public class Skip_List {
     public Skip_List(int max_level) {
         this.max_level = max_level;
         this.head = new SL_Node(Integer.MIN_VALUE, Integer.MIN_VALUE, this.max_level);
-        this.tail = new SL_Node(Integer.MAX_VALUE, Integer.MAX_VALUE, 0);
+        this.tail = new SL_Node(Integer.MIN_VALUE, Integer.MAX_VALUE, 0);
         this.size = 0;
         this.curr_max = 1;
     }
@@ -40,8 +40,10 @@ public class Skip_List {
                 current.next[i] = newNode;
             }
         }
+        tail = head.next[0];
         size++;
     }
+
     public int get_size(){
         return this.size;
     }
@@ -49,13 +51,18 @@ public class Skip_List {
     public int search(int key) {
         SL_Node current = head;
         for (int i = curr_max-1; i >= 0; i--) {
-            while (current.next[i] != null && current.next[i].getKey()<key) {
+            while (null != current.next[i]) {
+                // when at bottom level, i is always 0, needs to find the right node to stop
+                if (current.next[i].getKey() > key) {
+                    break;
+                }
+                if (current.next[i].getKey() == key) {
+                    return current.next[i].getVal();
+                }
                 current = current.next[i];
             }
         }
-        if (current != null && current.getKey()!=key){
-            return current.getKey();
-        }
+
         return -1;
     }
 
@@ -78,6 +85,8 @@ public class Skip_List {
         }
         return found;
     }
+
+    //directly taken from https://github.com/YiYeHuang/SkipList/blob/master/src/main/java/impl/SkipList.java
     public void print_level() {
         SL_Node current = head;
         int start = max_level - 1;
@@ -116,6 +125,30 @@ public class Skip_List {
             }
 
             System.out.println();
+        }
+    }
+
+    public int search_up(int key) {
+        SL_Node current = tail;
+        int i = 0;
+        while(current!=null && current.getKey()<key){
+            //go up if you can
+            if (current.next.length > i+1 && current.next[i+1]!=null){
+                i++;
+                current = current.next[i];
+            } else if (current.next[i] != null) {
+                current = current.next[i];
+            }
+            else if (i>0){
+                i--;
+                current = current.next[i];
+            }
+        }
+        if (current.getKey()==key) {
+            return current.getVal();
+        }
+        else{
+            return -1;
         }
     }
 
